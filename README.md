@@ -28,11 +28,36 @@ npm run dev
 
 ## 构建与部署
 
+### 本地开发
+
 ```bash
-npm run build
+npm run dev
 ```
 
-构建产物在 `dist/` 目录，可部署至 GitHub Pages、Vercel、Netlify 等静态托管平台。
+浏览器访问 http://localhost:5173
+
+### GitHub Pages（my-hetong 仓库）
+
+站点地址：https://hufelix765-alt.github.io/my-hetong/
+
+```bash
+npm run build:pages
+```
+
+构建产物在 `dist/` 目录（含 `404.html`，用于 SPA 路由）。本地预览 Pages 效果：
+
+```bash
+npm run preview:pages
+```
+
+访问 http://localhost:4173/my-hetong/
+
+**推送到 GitHub 后自动部署：**
+
+1. 仓库 **Settings → Pages → Build and deployment** 选择 **GitHub Actions**
+2. 将代码 push 到 `main` 或 `master` 分支，`.github/workflows/deploy.yml` 会自动构建并发布
+
+也可手动将 `dist/` 目录内容上传到 gh-pages 分支或 Pages 源目录。
 
 ## 免责声明
 
