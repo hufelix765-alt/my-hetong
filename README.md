@@ -1,63 +1,64 @@
 # 合同模板管理系统
 
-基于《中华人民共和国民法典》合同编的智能合同模板网站。支持条款在线编辑、中英文对照、Word/PDF 导出、合同比对分析及跨合同条款检索。
+基于《中华人民共和国民法典》合同编的智能合同模板**网页应用**。支持条款在线编辑、中英文对照、Word/PDF 导出、合同比对分析及跨合同条款检索。
 
-## 功能特性
+**在线地址：** https://hufelix765-alt.github.io/my-hetong/
 
-- **26 类内置合同模板**：19 类民法典标准合同 + 外贸采购 + 代工（OEM/ODM）+ 专利 / 商标 / 软著代理
-- **逐条编辑**：每条条款可独立修改，支持中文、英文及双语对照
-- **一键导出**：生成并下载 Word（.docx）或 PDF 文件
-- **合同比对**：上传 .docx / .pdf / .txt 合同，与标准模板比对，识别缺失条款、分析风险并给出修改建议
-- **条款检索**：按标签（如知识产权、违约责任）检索不同合同中的相关约定，支持一键复制
-- **非标准合同**：名称不在标准库中的合同可单独创建管理
-
-## 技术栈
-
-- React 19 + TypeScript + Vite
-- Tailwind CSS 4
-- docx / jsPDF / mammoth / pdf.js
-
-## 快速开始
+## 本地运行
 
 ```bash
 npm install
 npm run dev
 ```
 
-浏览器访问 http://localhost:5173
+浏览器打开 http://localhost:5173
 
-## 构建与部署
+## 发布到 GitHub Pages（静态网页）
 
-### 本地开发
+网页样式与功能都在 `dist/` 构建产物里。**不要把源码根目录直接当 Pages 发布**，否则页面会空白。
 
-```bash
-npm run dev
+### 第一步：推送代码到 GitHub
+
+```powershell
+cd C:\Users\14546\Desktop\hetongmoban
+git add .
+git commit -m "更新合同模板网页"
+git push origin main
 ```
 
-浏览器访问 http://localhost:5173
+### 第二步：开启自动部署（只需设置一次）
 
-### GitHub Pages（my-hetong 仓库）
+1. 打开 https://github.com/hufelix765-alt/my-hetong/settings/pages
+2. **Build and deployment → Source** 选择 **GitHub Actions**
+3. 回到 **Actions** 标签，确认 “Deploy to GitHub Pages” 工作流运行成功（绿色 ✓）
 
-站点地址：https://hufelix765-alt.github.io/my-hetong/
+约 1–2 分钟后访问：https://hufelix765-alt.github.io/my-hetong/
 
-```bash
-npm run build:pages
+### 备选：手动发布到 gh-pages 分支
+
+若 Actions 不可用，在本机执行（需能连接 GitHub）：
+
+```powershell
+npm run deploy:gh
 ```
 
-构建产物在 `dist/` 目录（含 `404.html`，用于 SPA 路由）。本地预览 Pages 效果：
+然后在 **Settings → Pages** 中选择 Branch：**gh-pages** / **/(root)**
 
-```bash
+## 本地预览（与线上一致）
+
+```powershell
 npm run preview:pages
 ```
 
 访问 http://localhost:4173/my-hetong/
 
-**推送到 GitHub 后自动部署：**
+## 构建命令
 
-1. 仓库 **Settings → Pages → Build and deployment** 选择 **GitHub Actions**
-2. 将代码 push 到 `main` 或 `master` 分支，`.github/workflows/deploy.yml` 会自动构建并发布
-
-也可手动将 `dist/` 目录内容上传到 gh-pages 分支或 Pages 源目录。
+| 命令 | 用途 |
+|------|------|
+| `npm run build` | 本地或自有域名根路径部署 |
+| `npm run build:pages` | GitHub Pages（路径 `/my-hetong/`） |
+| `npm run deploy:gh` | 构建并推送到 gh-pages 分支 |
 
 ## 免责声明
 
