@@ -8,6 +8,7 @@
     "build": "tsc -b && vite build",
     "build:pages": "tsc -b && node scripts/build-pages.mjs",
     "build:github": "npm run build:pages && node scripts/publish-docs.mjs",
+    "build:root": "node scripts/build-root.mjs",
     "preview": "vite preview",
     "preview:pages": "vite preview --base /my-hetong/",
     "lint": "eslint ."

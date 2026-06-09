@@ -1,39 +1,62 @@
 # GitHub Pages 部署指南
 
-## 关键原则
+## ⚠️ 当前 GitHub 仓库的问题
 
-GitHub Pages **只能托管静态文件**，不能直接运行 React 源码。
+远程仓库 **缺少 `src/` 和 `docs/` 文件夹**，只有配置文件，所以线上打不开。
 
-| 目录 | 用途 |
+必须用 **GitHub Desktop 推送完整项目**，不能只网页上传几个文件。
+
+---
+
+## 本地打不开（Connection Failed）
+
+`ERR_CONNECTION_REFUSED` = 开发服务器没启动。
+
+**方法 1：** 双击项目里的 `start.bat`
+
+**方法 2：**
+```powershell
+cd C:\Users\14546\Desktop\hetongmoban
+npm install
+npm run dev
+```
+浏览器打开：**http://localhost:5173**
+
+---
+
+## 线上部署（推荐：GitHub Actions 自动构建）
+
+### 第 1 步：推送完整代码
+
+用 GitHub Desktop：
+1. File → Add local repository → 选 `C:\Users\14546\Desktop\hetongmoban`
+2. Commit 全部文件（必须含 `src/`、`.github/workflows/`）
+3. Push origin
+
+### 第 2 步：改 Pages 设置
+
+https://github.com/hufelix765-alt/my-hetong/settings/pages
+
+| 项目 | 选择 |
 |------|------|
-| `index.html` + `src/` | 本地开发用 ❌ |
-| `docs/` | 构建后的网站 ✅ 给 GitHub 用 |
+| Source | **GitHub Actions** |
 
-## 三步部署
+保存后等 2～3 分钟，Actions 标签页出现绿色 ✓ 即成功。
+
+---
+
+## 备选：手动 docs 部署
 
 ```powershell
 npm run build:github
-git add .
-git commit -m "更新网站"
-git push origin main
 ```
 
-GitHub → Settings → Pages：
+推送后 Pages 设为 **main / docs**（不是 /root）。
 
-- Source: **Deploy from a branch**
-- Branch: **main**
-- Folder: **/docs**（⚠️ 不是 /root）
+---
 
 ## 验证
 
-访问 https://hufelix765-alt.github.io/my-hetong/
+https://hufelix765-alt.github.io/my-hetong/
 
-F12 → Network 应看到 `/my-hetong/assets/xxx.js`，而不是 `/src/main.tsx`。
-
-## 网页上传方式
-
-若用 GitHub 网页上传：
-
-1. 先在本机运行 `npm run build:github`
-2. 上传整个 **`docs`** 文件夹到仓库
-3. Pages 设置改为 **main / docs**
+F12 → Network 应看到 `/my-hetong/assets/xxx.js`
